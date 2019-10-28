@@ -20,9 +20,11 @@ namespace Searchie
 
         public List<int> search(string keyword, string url)
         {
+            //classID of the HTML document which contains URLs
             string classID = "BNeawe UPmit AP7Wnd";
             try
             {
+                //Parameterised number of results and keywords
                 string searchStr = String.Format("https://google.com.au/search?num={0}&q={1}", maxResults, keyword);
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(searchStr);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -34,6 +36,7 @@ namespace Searchie
                     string[] responseLines = content.Split("<div class=");
                     foreach (var s in responseLines)
                     {
+                        //Adds the split line if it has matching classID
                         if (s.Contains(classID))
                         {
                             responseList.Add(s);
@@ -44,13 +47,20 @@ namespace Searchie
 
                 for (int i = 0; i < responseList.Count; i++)
                 {
+                    //Adds the position of the search if responseList[i] contains the URL
                     if (responseList[i].Contains(url))
                     {
                         searchPositions.Add(i);
                     }
                 }
 
-            } catch (WebException)
+                if (searchPositions.Count == 0)
+                {
+                    searchPositions.Add(0);
+                }
+
+            }//Exceptions captured using sentinel values 
+            catch (WebException)
             {
                 searchPositions.Add(-1);
             } catch (IOException)

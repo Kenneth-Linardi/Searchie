@@ -35,6 +35,7 @@
             this.uriTb = new System.Windows.Forms.TextBox();
             this.titleLbl = new System.Windows.Forms.Label();
             this.errorMsgLbl = new System.Windows.Forms.Label();
+            this.helpBtn = new System.Windows.Forms.Button();
             // 
             // searchBtn
             // 
@@ -83,10 +84,10 @@
             // titleLbl
             // 
             this.titleLbl.AutoSize = true;
-            this.titleLbl.Font = new System.Drawing.Font("Segoe MDL2 Assets", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.titleLbl.Location = new System.Drawing.Point(94, 20);
+            this.titleLbl.Font = new System.Drawing.Font("Segoe UI Semibold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.titleLbl.Location = new System.Drawing.Point(69, 21);
             this.titleLbl.Name = "titleLbl";
-            this.titleLbl.Size = new System.Drawing.Size(124, 35);
+            this.titleLbl.Size = new System.Drawing.Size(153, 47);
             this.titleLbl.TabIndex = 5;
             this.titleLbl.Text = "Searchie";
             // 
@@ -98,9 +99,20 @@
             this.errorMsgLbl.Size = new System.Drawing.Size(0, 15);
             this.errorMsgLbl.TabIndex = 6;
             // 
+            // helpBtn
+            // 
+            this.helpBtn.Location = new System.Drawing.Point(277, 4);
+            this.helpBtn.Name = "helpBtn";
+            this.helpBtn.Size = new System.Drawing.Size(22, 23);
+            this.helpBtn.TabIndex = 7;
+            this.helpBtn.Text = "?";
+            this.helpBtn.UseVisualStyleBackColor = true;
+            this.helpBtn.Click += new System.EventHandler(this.helpBtn_Click);
+            // 
             // Searchie
             // 
             this.ClientSize = new System.Drawing.Size(301, 227);
+            this.Controls.Add(this.helpBtn);
             this.Controls.Add(this.errorMsgLbl);
             this.Controls.Add(this.titleLbl);
             this.Controls.Add(this.uriTb);
@@ -122,6 +134,7 @@
         private System.Windows.Forms.TextBox uriTb;
         private System.Windows.Forms.Label titleLbl;
         private System.Windows.Forms.Label errorMsgLbl;
+        private System.Windows.Forms.Button helpBtn;
     }
 }
 
