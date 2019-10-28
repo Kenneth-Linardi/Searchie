@@ -17,7 +17,7 @@ namespace Searchie
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Searchie());
+            Application.Run(new Searchie(new httpService()));
         }
     }
 }
