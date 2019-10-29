@@ -22,6 +22,8 @@ namespace Searchie
         {
             //classID of the HTML document which contains URLs
             string classID = "BNeawe UPmit AP7Wnd";
+            responseList = new List<string>();
+            searchPositions = new List<int>();
             try
             {
                 //Parameterised number of results and keywords
@@ -56,19 +58,13 @@ namespace Searchie
 
                 if (searchPositions.Count == 0)
                 {
-                    searchPositions.Add(0);
+                    searchPositions.Add(-1);
                 }
 
             }//Exceptions captured using sentinel values 
-            catch (WebException)
+            catch (Exception exception)
             {
-                searchPositions.Add(-1);
-            } catch (IOException)
-            {
-                searchPositions.Add(-2);
-            } catch (OutOfMemoryException)
-            {
-                searchPositions.Add(-3);
+                throw exception;
             }
 
             return searchPositions;

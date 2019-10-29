@@ -12,26 +12,27 @@ namespace Searchie
         {
             InitializeComponent();
             myService = httpService;
+            urlTb.ForeColor = SystemColors.GrayText;
+            urlTb.Text = "https://www.";
         }
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
             string keywords = keywordTb.Text;
-            string url = uriTb.Text;
-
-            //Checks for valid user inputs
-            if (CheckUrl(url) && keywords != null)
+            string url = urlTb.Text;
+            try
             {
-                List<int> searchResults = new List<int>();
-
-                //Replaces spaces with "+" for URL usage
-                string nospaceKeyword = keywords.Replace(" ", "+");
-                searchResults = myService.search(nospaceKeyword, url);
-                string messageBoxStr = "";
-
-                //Determines whether the value in searchResults is a sentinel value or not.
-                if (searchResults[0] >= 0)
+                //Checks for valid user inputs
+                if (CheckUrl(url) && keywords != null)
                 {
+                    List<int> searchResults = new List<int>();
+
+                    //Replaces spaces with "+" for URL usage
+                    string nospaceKeyword = keywords.Replace(" ", "+");
+                    searchResults = myService.search(nospaceKeyword, url);
+                    string messageBoxStr = "";
+
+                    //Determines whether the value in searchResults is a sentinel value or not.
                     if (searchResults[0] > 0)
                     {
                         messageBoxStr = String.Format("The URL ({0}) has come up {1} time(s) in the first 100 results.", url, searchResults.Count);
@@ -40,33 +41,24 @@ namespace Searchie
                         {
                             messageBoxStr += " " + position;
                         }
-                    } else
-                    {
-                        messageBoxStr = String.Format("The URL ({0}) has come up 0 times in the first 100 results.", url);
+                        MessageBox.Show(messageBoxStr, "Search Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    MessageBox.Show(messageBoxStr, "Search Results", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                } else if (searchResults[0] < 0)
-                {
-                    switch (searchResults[0])
+                    else if (searchResults[0] < 0)
                     {
-                        case -1:
-                            messageBoxStr = "Web Exception! Please make sure you have a stable internet connection";
-                            break;
-                        case -2:
-                            messageBoxStr = "IO Exception! Stream Reader cannot process stream due to an I/O error";
-                            break;
-                        case -3:
-                            messageBoxStr = "Out Of Memory Exception! Stream Reader cannot process stream due to an OutOfMemory error";
-                            break;
+                        MessageBox.Show(messageBoxStr, "Search Results", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    MessageBox.Show(messageBoxStr, "Search Results", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 }
-                
-            } else
+                else
+                {
+                    errorMsgLbl.Text = "Invalid URL or Keywords";
+                    errorMsgLbl.ForeColor = Color.Red;
+                }
+            } catch (Exception exception)
             {
-                errorMsgLbl.Text = "Invalid URL or Keywords";
-                errorMsgLbl.ForeColor = Color.Red;
+                MessageBox.Show(exception.Message.ToString(), "Erorr!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
         }
 
         /*
@@ -85,6 +77,26 @@ namespace Searchie
         {
             HelpForm helpForm = new HelpForm();
             helpForm.Show();
+        }
+
+        /*
+         * Autofills the textbox with a hint text 
+         */
+        private void urlTb_Leave(object sender, EventArgs e)
+        {
+            urlTb.ForeColor = SystemColors.GrayText;
+            if (!urlTb.Text.Contains("https://www."))
+            {
+                urlTb.Text = "https://www.";
+            }
+        }
+
+        /*
+         * Sets a visual indication when the textbox is in focus.
+         */
+        private void urlTb_Enter(object sender, EventArgs e)
+        {
+            urlTb.ForeColor = Color.Black;
         }
     }
 }

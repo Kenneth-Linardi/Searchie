@@ -30,9 +30,9 @@
         {
             this.searchBtn = new System.Windows.Forms.Button();
             this.keywordLbl = new System.Windows.Forms.Label();
-            this.uriLbl = new System.Windows.Forms.Label();
+            this.urlLbl = new System.Windows.Forms.Label();
             this.keywordTb = new System.Windows.Forms.TextBox();
-            this.uriTb = new System.Windows.Forms.TextBox();
+            this.urlTb = new System.Windows.Forms.TextBox();
             this.titleLbl = new System.Windows.Forms.Label();
             this.errorMsgLbl = new System.Windows.Forms.Label();
             this.helpBtn = new System.Windows.Forms.Button();
@@ -57,15 +57,15 @@
             this.keywordLbl.TabIndex = 1;
             this.keywordLbl.Text = "Keyword:";
             // 
-            // uriLbl
+            // urlLbl
             // 
-            this.uriLbl.AutoSize = true;
-            this.uriLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.uriLbl.Location = new System.Drawing.Point(84, 113);
-            this.uriLbl.Name = "uriLbl";
-            this.uriLbl.Size = new System.Drawing.Size(38, 21);
-            this.uriLbl.TabIndex = 2;
-            this.uriLbl.Text = "URI:";
+            this.urlLbl.AutoSize = true;
+            this.urlLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.urlLbl.Location = new System.Drawing.Point(84, 113);
+            this.urlLbl.Name = "urlLbl";
+            this.urlLbl.Size = new System.Drawing.Size(42, 21);
+            this.urlLbl.TabIndex = 2;
+            this.urlLbl.Text = "URL:";
             // 
             // keywordTb
             // 
@@ -74,12 +74,14 @@
             this.keywordTb.Size = new System.Drawing.Size(134, 23);
             this.keywordTb.TabIndex = 3;
             // 
-            // uriTb
+            // urlTb
             // 
-            this.uriTb.Location = new System.Drawing.Point(128, 111);
-            this.uriTb.Name = "uriTb";
-            this.uriTb.Size = new System.Drawing.Size(134, 23);
-            this.uriTb.TabIndex = 4;
+            this.urlTb.Location = new System.Drawing.Point(128, 111);
+            this.urlTb.Name = "urlTb";
+            this.urlTb.Size = new System.Drawing.Size(134, 23);
+            this.urlTb.TabIndex = 4;
+            this.urlTb.Enter += new System.EventHandler(this.urlTb_Enter);
+            this.urlTb.Leave += new System.EventHandler(this.urlTb_Leave);
             // 
             // titleLbl
             // 
@@ -115,9 +117,9 @@
             this.Controls.Add(this.helpBtn);
             this.Controls.Add(this.errorMsgLbl);
             this.Controls.Add(this.titleLbl);
-            this.Controls.Add(this.uriTb);
+            this.Controls.Add(this.urlTb);
             this.Controls.Add(this.keywordTb);
-            this.Controls.Add(this.uriLbl);
+            this.Controls.Add(this.urlLbl);
             this.Controls.Add(this.keywordLbl);
             this.Controls.Add(this.searchBtn);
             this.Name = "Searchie";
@@ -129,9 +131,9 @@
 
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Label keywordLbl;
-        private System.Windows.Forms.Label uriLbl;
+        private System.Windows.Forms.Label urlLbl;
         private System.Windows.Forms.TextBox keywordTb;
-        private System.Windows.Forms.TextBox uriTb;
+        private System.Windows.Forms.TextBox urlTb;
         private System.Windows.Forms.Label titleLbl;
         private System.Windows.Forms.Label errorMsgLbl;
         private System.Windows.Forms.Button helpBtn;
